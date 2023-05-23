@@ -4,19 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Publisher extends Model
+class Image extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'name'
-    ];
-
-    public function books(): HasMany
+    public function book(): BelongsTo
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsTo(Book::class,'id','image_id');
     }
 }

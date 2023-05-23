@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\LoginRequesrt;
-use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\LoginRequesrt;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -18,7 +17,7 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
-    public function login(LoginRequesrt $request)
+    public function login(LoginRequesrt $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
 

@@ -10,10 +10,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 });
 
-Route::group(['middleware'=> 'auth:api'],function () {
-    Route::get('/test',function () {
-        return 'hello';
-    });
+Route::group(['middleware'=> 'web'],function () {
+    Route::get('/test',[\App\Http\Controllers\Api\BookController::class,'index']);
 });
-
 
