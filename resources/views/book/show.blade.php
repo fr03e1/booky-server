@@ -40,11 +40,20 @@
                             <table class="table table-hover text-nowrap">
                                 <tbody>
                                 <tr>
-{{--                                    <img src="{{$book->imageUrl}}" style="height: 30px">--}}
+
                                 </tr>
                                 <tr>
                                     <td>ID</td>
                                     <td>{{$book->id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Изображения</td>
+                                    <td> @foreach($book->images as $image)
+                                            <img src="{{url('storage/' . $image->preview_image)}}" alt="..." class="img-thumbnail">
+                                            <img src="{{url('storage/' . $image->image_2)}}" alt="Не загружено" class="img-thumbnail">
+                                            <img src="{{url('storage/' . $image->image_3)}}" alt="Не загружено" class="img-thumbnail">
+                                            <img src="{{url('storage/' . $image->image_4)}}" alt="Не загружено" class="img-thumbnail">
+                                        @endforeach</td>
                                 </tr>
                                 <tr>
                                     <td>Название</td>

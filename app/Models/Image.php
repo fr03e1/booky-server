@@ -18,6 +18,12 @@ class Image extends Model
       'image_4',
     ];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at',
+        'id'
+    ];
+
     public function book(): BelongsTo
     {
         return $this->belongsTo(Book::class,'id','image_id');
