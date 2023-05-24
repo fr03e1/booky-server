@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
+use App\Http\Services\UploadImageService;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Publisher;
-use Illuminate\Support\Facades\Storage;
+
 
 class BookController extends Controller
 {
@@ -15,7 +17,9 @@ class BookController extends Controller
         protected Book $book,
         protected Author $author,
         protected Category $category,
-        protected Publisher $publisher
+        protected Publisher $publisher,
+        protected Image $image,
+        protected UploadImageService $uploadImageService
     )
     {
     }
@@ -24,18 +28,11 @@ class BookController extends Controller
     {
         $books = $this->book::all();
         return view('book.index',compact('books'));
-
     }
 
-    public function show($id)
+    public function show(Book $book)
     {
-        $book = $this->book::find($id);
-        $categories = $book['category'];
-        $publishers = $book['publisher'];
-        $category = $categories->title;
-        $publisher = $publishers->title;
-        $authors = $book->authors;
-        return view('book.show',compact('book','category','publisher','authors'));
+        return view('book.show',compact('book'));
     }
 
     public function edit(Book $book)
@@ -48,42 +45,52 @@ class BookController extends Controller
 
     public function store(BookRequest $request)
     {
-
         $data = $request->validated();
-        $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
-        $authorsId = $data['authors'];
+        $authors = $data['authors'];
+
+        $images = $this->uploadImageService->storeImages($data['preview_image'], $data['title'], $data['images'] ?? []);
+        $data['image_id'] = $this->image::firstOrCreate($images)->id;
+
         unset($data['authors']);
-        $book = Book::create($data);
-        $book->authors()->attach($authorsId);
+        unset($data['preview_image']);
+        unset($data['images']);
+
+        $book = $this->book::firstOrCreate($data);
+        $book->authors()->attach($authors);
+
         return redirect()->route('book.index');
     }
 
     public function create()
     {
-        $authors = Author::all();
-        $categories = Category::all();
-        $publishers = Publisher::all();
+        $authors = $this->author::all();
+        $categories = $this->category::all();
+        $publishers = $this->publisher::all();
         return view('book.create',compact('authors','categories','publishers'));
     }
 
     public function update(BookRequest $request,Book $book)
     {
         $data = $request->validated();
-        $authorsId = $data['authors'];
+        $authors = $data['authors'];
+
+        $imagData = $this->uploadImageService->storeImages($data['preview_image'], $data['title'], $data['images'] ?? []);
+        $images = $this->image::find($book->image_id);
+
         unset($data['authors']);
+        unset($data['preview_image']);
+        unset($data['images']);
+
+        $images->update($imagData);
         $book->update($data);
-        $book->authors()->sync($authorsId);
-        $categories = $book['category'];
-        $category = $categories->title;
-        $publishers = $book['publisher'];
-        $publisher = $publishers->title;
-        $authors = $book->authors;
-        return view('book.show',compact('book','category','publisher','authors'));
+
+        $book->authors()->sync($authors);
+        return view('book.show',compact('book'));
     }
 
     public function delete(Book $book)
     {
-        Book::find($book)->authors()->detach();
+        Book::find($book->id)->authors()->detach();
         $book->delete();
         return redirect()->route('book.index');
     }

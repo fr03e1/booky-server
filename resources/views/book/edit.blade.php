@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <form action="{{ route('book.update',$book->id) }}" method="POST">
+                <form action="{{ route('book.update',$book->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('patch')
                     @if($errors->title)
@@ -52,31 +52,38 @@
                     <div class="form-group">
                         <input value="{{$book->count}}"  type="number" name="count" class="form-control" placeholder="Количество">
                     </div>
+                    <div class="form-group">
+                        <input type="number" value="{{$book->year}}" name="year" class="form-control" placeholder="Год издания">
+                    </div>
+                    <div class="form-group">
+                        <input type="string" value="{{$book->ISBN}}" name="ISBN" class="form-control" placeholder="ISBN">
+                    </div>
 
                     <div class="form-group">
                         <select name="category_id" class="form-control select2" style="width: 100%;">
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->title}}</option>
+                                <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input name="preview_image" type="file" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile">Выберите файл</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Загрузка</span>
-                            </div>
-                        </div>
+                        <select name="binding" class="form-control select2" style="width: 100%;">
+                            <option  value="твердый">Твердый</option>
+                            <option value="мягкий">Мягкий</option>
+                        </select>
                     </div>
+
+                    <label class="m-2">Превью</label>
+                    <input type="file" id="input-file-now-custom-3" class="form-control m-2" name="preview_image">
+
+                    <label class="m-2">Остальные Изображения</label>
+                    <input type="file"  class="form-control m-2" name="images[]" multiple>
 
                     <div class="form-group">
                         <select name="publisher_id" class="form-control select2" style="width: 100%;">
                             @foreach($publishers as $publisher)
-                                <option value="{{$publisher->id}}">{{$publisher->title}}</option>
+                                <option value="{{$publisher->id}}">{{$publisher->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -84,7 +91,7 @@
                     <div class="form-group">
                         <select name="authors[]" class="authors" multiple="multiple" data-placeholder="Выберите автора" style="width: 100%;">
                             @foreach($authors as $author)
-                                <option value="{{$author->id}}">{{$author->author}}</option>
+                                <option value="{{$author->id}}">{{$author->full_name}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -40,7 +40,7 @@
                             <table class="table table-hover text-nowrap">
                                 <tbody>
                                 <tr>
-                                    <img src="{{$book->imageUrl}}" style="height: 30px">
+{{--                                    <img src="{{$book->imageUrl}}" style="height: 30px">--}}
                                 </tr>
                                 <tr>
                                     <td>ID</td>
@@ -64,17 +64,16 @@
                                 </tr>
                                 <tr>
                                     <td>Категория</td>
-                                    <td>{{$category}} </td>
+                                    <td>{{$book->category->name}} </td>
                                 </tr>
                                 <tr>
                                     <td>Издательство</td>
-                                    <td>{{$publisher}} </td>
+                                    <td>{{$book->publisher->name}} </td>
                                 </tr>
                                 <tr>
                                     <td>Авторы</td>
-                                    @foreach($authors as $author)
-
-                                        <td>{{$author->author}} </td>
+                                    @foreach($book->authors as $author)
+                                        <td>{{$author->full_name}} </td>
                                     @endforeach
                                 </tr>
                                 </tbody>

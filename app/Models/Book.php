@@ -15,6 +15,19 @@ class Book extends Model
 {
     use HasFactory, SoftDeletes, Filterable;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'price',
+        'count',
+        'year',
+        'binding',
+        'ISBN',
+        'category_id',
+        'publisher_id',
+        'image_id',
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
