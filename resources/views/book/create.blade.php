@@ -76,8 +76,10 @@
                         </select>
                     </div>
 
-                    <label class="m-2">Превью</label>
-                    <input type="file" id="input-file-now-custom-3" class="form-control m-2" name="preview_image">
+                    <div class="form-group w-50">
+                        <label class="m-2">Превью</label>
+                        <input type="file" id="input-file-now-custom-3" class="form-control m-2" name="preview_image">
+                    </div>
 
                     <label class="m-2">Остальные Изображения</label>
                     <input type="file"  class="form-control m-2" name="images[]" multiple>

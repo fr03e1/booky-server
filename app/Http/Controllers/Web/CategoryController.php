@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\CategoryRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
     public function __construct(protected Category $category)
     {
-        //$this->middleware('auth');
+        $this->middleware('auth:web');
     }
 
     public function index(): View

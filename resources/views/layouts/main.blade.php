@@ -37,15 +37,15 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-{{--            <div class="mr-2">--}}
-{{--                @auth()--}}
-{{--                    Пользователь, {{ auth()->user()->name }}--}}
-{{--                @endauth--}}
-{{--            </div>--}}
-{{--            <form method="post" action="{{route('logout')}}">--}}
-{{--                @csrf--}}
-{{--                <button type="submit">Выйти</button>--}}
-{{--            </form>--}}
+            <div class="mr-2">
+                @auth()
+                    Пользователь, {{ auth()->user()->name }}
+                @endauth
+            </div>
+            <form method="post" action="{{route('logout')}}">
+                @csrf
+                <button type="submit">Выйти</button>
+            </form>
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -102,15 +102,15 @@
                             </p>
                         </a>
                     </li>
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{ route('user.index') }}" class="nav-link">--}}
-{{--                            <i class="nav-icon fas fa-users"></i>--}}
-{{--                            <p>--}}
-{{--                                Пользователи--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                </ul>--}}
+                    <li class="nav-item">
+                        <a href="{{ route('user.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                Пользователи
+                            </p>
+                        </a>
+                    </li>
+                </ul>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

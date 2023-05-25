@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\AuthorRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\AuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class AuthorController extends Controller
 {
+
     public function __construct(protected Author $author)
     {
-        //$this->middleware('auth');
+        $this->middleware('auth:web');
     }
 
     public function index(): View

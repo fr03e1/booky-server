@@ -1,16 +1,18 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\Web\AdminController;
+use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\AuthorController;
+use App\Http\Controllers\Web\BookController;
+use App\Http\Controllers\Web\CategoryController;
+use App\Http\Controllers\Web\PublisherController;
+use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login','login')->name('login');
     Route::post('/login','store')->name('login.store');
+    Route::post('logout', 'delete')->name('logout');
 });
 
 Route::controller(AdminController::class)->group(function () {
@@ -57,21 +59,14 @@ Route::controller(BookController::class)->group(function () {
     Route::delete('/books/{book}', 'delete')->name('book.delete');
 });
 
-
-Route::middleware('auth')->group(function () {
-
-//
-//    Route::post('logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])
-//        ->name('logout');
-
-
-//
-//
-//    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index'])->name('user.index');
-//    Route::post('/users', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
-//    Route::get('/users/store', [\App\Http\Controllers\UserController::class, 'create'])->name('user.create');
-//    Route::get('/users/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show');
-//    Route::get('/users/edit/{user}', [\App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
-//    Route::patch('/users/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('user.update');
-//    Route::delete('/users/{user}', [\App\Http\Controllers\UserController::class, 'delete'])->name('user.delete');
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users', 'index')->name('user.index');
+    Route::post('/users', 'store')->name('user.store');
+    Route::get('/users/create', 'create')->name('user.create');
+    Route::get('/users/{user}', 'show')->name('user.show');
+    Route::get('/users/edit/{user}', 'edit')->name('user.edit');
+    Route::patch('/users/{user}', 'update')->name('user.update');
+    Route::delete('/users/{user}', 'delete')->name('user.delete');
 });
+
+

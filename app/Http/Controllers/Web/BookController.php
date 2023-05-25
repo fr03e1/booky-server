@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\BookRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\BookRequest;
 use App\Http\Services\UploadImageService;
 use App\Models\Author;
 use App\Models\Book;
@@ -22,6 +23,7 @@ class BookController extends Controller
         protected UploadImageService $uploadImageService
     )
     {
+        $this->middleware('auth:web');
     }
 
     public function index()

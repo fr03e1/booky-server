@@ -29,27 +29,15 @@
                     <div class="form-group">
                         <input type="text" value="{{$user->name ?? old('name')}}" name="name" class="form-control" placeholder="Имя">
                     </div>
+                    @role('admin')
                     <div class="form-group">
-                        <input type="text" value="{{$user->surname ?? old('surname')}}" name="surname" class="form-control" placeholder="Фамилия">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="{{$user->surname ?? old('patronymic')}}" name="patronymic" class="form-control" placeholder="Отчество">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" value="{{$user->age ?? old('age')}}" name="age" class="form-control" placeholder="Возраст">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="{{$user->address ?? old('address')}}" name="address" class="form-control" placeholder="Адрес">
-                    </div>
-
-                    <div>
-                        <select name="gender" class="custom-select form-control" id="exampleSelectBorder">
-                            <option disabled selected>Пол</option>
-                            <option {{$user->gender == 1 || old('gender') == 1 ? ' selected' : ''}} value="1">Мужской</option>
-                            <option {{$user->gender == 2 || old('gender') == 2 ? ' selected' : ''}} value="2">Женский </option>
+                        <select name="role_id" class="form-control select2" style="width: 100%;">
+                                <option value="manager">Мэнеджер</option>
+                                <option value="admin">Админ</option>
+                                <option value=3>Пользователь</option>
                         </select>
                     </div>
-
+                    @endrole
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Редактировать">
                     </div>

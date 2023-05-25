@@ -48,28 +48,8 @@
                                     <td>{{$user->name}} </td>
                                 </tr>
                                 <tr>
-                                    <td>Фамилия</td>
-                                    <td>{{$user->surname}} </td>
-                                </tr>
-                                <tr>
-                                    <td>Отчество</td>
-                                    <td>{{$user->patronymic}} </td>
-                                </tr>
-                                <tr>
                                     <td>Email</td>
                                     <td>{{$user->email}} </td>
-                                </tr>
-                                <tr>
-                                    <td>Возраст</td>
-                                    <td>{{$user->age}} </td>
-                                </tr>
-                                <tr>
-                                    <td>Адрес</td>
-                                    <td>{{$user->address}} </td>
-                                </tr>
-                                <tr>
-                                    <td>Пол</td>
-                                    <td>{{$user->genderTitle }} </td>
                                 </tr>
                                 </tbody>
                             </table>

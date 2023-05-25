@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\PublisherRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\PublisherRequest;
 use App\Models\Publisher;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class PublisherController extends Controller
 {
     public function __construct(protected Publisher $publisher)
     {
-        //$this->middleware('auth');
+        $this->middleware('auth:web');
     }
 
     public function index(): View

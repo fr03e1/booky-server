@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequesrt;
-use App\Http\Requests\LoginRequest;
-use App\Models\User;
+use App\Http\Requests\Web\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['web'], ['except' => ['login']]);
+    }
 
     public function login(): View | RedirectResponse
     {
@@ -22,9 +25,10 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function store(LoginRequest $request)
+    public function store(LoginRequest $request):RedirectResponse
     {
         $credentials = $request->validated();
+
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
 
@@ -34,5 +38,13 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    public function delete(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('login');
     }
 }

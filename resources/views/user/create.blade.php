@@ -54,27 +54,15 @@
                     <div class="form-group">
                         <input type="password" value="{{old('password_confirmation')}}" name="password_confirmation" class="form-control" placeholder="Подтвердите пароль">
                     </div>
+                    @role('admin')
                     <div class="form-group">
-                        <input type="text" value="{{old('surname')}}" name="surname" class="form-control" placeholder="Фамилия">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="{{old('patronymic')}}" name="patronymic" class="form-control" placeholder="Отчество">
-                    </div>
-                    <div class="form-group">
-                        <input type="number" value="{{old('age')}}" name="age" class="form-control" placeholder="Возраст">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" value="{{old('address')}}" name="address" class="form-control" placeholder="Адрес">
-                    </div>
-
-                    <div>
-                        <select name="gender" class="custom-select form-control" id="exampleSelectBorder">
-                            <option disabled selected>Пол</option>
-                            <option {{old('gender') == 1 ? ' selected' : ''}} value="1">Мужской</option>
-                            <option {{old('gender') == 2 ? ' selected' : ''}} value="2">Женский </option>
+                        <select name="role_id" class="form-control select2" style="width: 100%;">
+                            <option value=2>Мэнеджер</option>
+                            <option value=1>Админ</option>
+                            <option value=3>Пользователь</option>
                         </select>
                     </div>
-
+                    @endrole
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Добавить">
                     </div>
