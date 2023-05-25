@@ -12,7 +12,7 @@ class Author extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'fullName',
+        'full_name',
     ];
 
     public function books():BelongsToMany

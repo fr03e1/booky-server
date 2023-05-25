@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Filters\Traits\Filterable;
+use App\Traits\HasFilters;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,9 +11,24 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
+
 class Book extends Model
 {
-    use HasFactory, SoftDeletes, Filterable;
+    use HasFactory, SoftDeletes, HasFilters;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'price',
+        'count',
+        'year',
+        'binding',
+        'ISBN',
+        'category_id',
+        'publisher_id',
+        'image_id',
+    ];
+
 
     public function category(): BelongsTo
     {
