@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Http\Filters\FilterInterface;
+use App\Filters\FilterInterface;
 use Illuminate\Database\Eloquent\Builder;
 
 trait HasFilters

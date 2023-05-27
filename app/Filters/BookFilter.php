@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Filters;
-
-
+namespace App\Filters;
 use Illuminate\Database\Eloquent\Builder;
 
 class BookFilter extends AbstractFilter
@@ -17,7 +15,6 @@ class BookFilter extends AbstractFilter
     {
         return [
             self::CATEGORIES => [$this, 'categories'],
-            self::PRICE => [$this, 'price'],
             self::AUTHORS => [$this,'authors'],
             self::PUBLISHERS => [$this,'publishers'],
             self::YEAR => [$this,'year'],

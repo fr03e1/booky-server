@@ -15,7 +15,16 @@ class ImageCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'data' => $this->collection
+            'data' => $this->collection->map(function ($image) {
+                return [
+                    'preview' => url('storage/' . $image->preview_image),
+                    'image2' => url('storage/'.$image->image_2),
+                    'image3' => url('storage/'.$image->image_3),
+                    'image4' => url('storage/'.$image->image_4),
+                ];
+            }),
+
+
         ];
     }
 }

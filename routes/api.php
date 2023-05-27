@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,8 +13,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(BookController::class)->group(function () {
-    Route::post('/books',[BookController::class,'index']);
+    Route::post('/books','index');
+    Route::get('/filters','getFilters');
 });
-
 
 
