@@ -30,6 +30,7 @@ class BookRequest extends FormRequest
             'pages' => 'nullable|integer',
             'sortBy' => 'nullable|string',
             'order' => 'nullable|string',
+            'page' => 'nullable|integer',
         ];
     }
 }
