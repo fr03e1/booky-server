@@ -25,8 +25,11 @@ class BookRequest extends FormRequest
             'categories' => 'nullable|array',
             'authors' => 'nullable|array',
             'publishers' => 'nullable|array',
-            'year' => 'nullable|integer',
+            'year' => 'nullable|array',
             'price' => 'nullable|array',
+            'pages' => 'nullable|integer',
+            'sortBy' => 'nullable|string',
+            'order' => 'nullable|string',
         ];
     }
 }

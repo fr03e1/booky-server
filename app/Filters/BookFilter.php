@@ -46,6 +46,6 @@ class BookFilter extends AbstractFilter
 
     protected function year(Builder $builder, $value): void
     {
-        $builder->where('year',$value);
+        $builder->whereBetween('year',$value);
     }
 }
